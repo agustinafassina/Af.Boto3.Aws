@@ -1,8 +1,7 @@
 # Af.Boto3.Aws
-Boto3 is the official Amazon Web Services (AWS) library for Python. It allows developers to interact programmatically and easily with almost all AWS services.
+This repository contains several Python scripts using boto3, the official AWS SDK for Python, to automate common tasks and perform analysis in the cloud.
 
+### Scripts detail
 
-Run app
-```
-
-```
+- EC2 Instances Filter by Tag: Lists all instances across the account that have a specific tag.
+- EC2 Instances in the Entire Account: Lists all instances grouped by tag across the account, without restricting to a single instance.
