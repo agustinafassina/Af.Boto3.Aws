@@ -1,9 +1,7 @@
 import boto3
 
-# Crear un cliente de EC2 para poder listar regiones
 ec2 = boto3.client('ec2')
 
-# Obtener todas las regiones
 regions_response = ec2.describe_regions()
 regions = [region['RegionName'] for region in regions_response['Regions']]
 
@@ -72,7 +70,6 @@ def check_ecr_repositories(region):
     repositories_without_project_tag = []
 
     for repository in response['repositories']:
-        # Verifica si el tag "Project" no está presente (no se utiliza Tags para ECR)
         if not hasattr(repository, 'tags') or not any(tag['Key'] == 'Project' for tag in repository.get('tags', [])):
             repositories_without_project_tag.append(repository['repositoryName'])
 
@@ -94,7 +91,6 @@ def check_configuration_rules(region):
     if rules_without_project_tag:
         print(f"Config Rules without 'Project' tag: {rules_without_project_tag}")
 
-# Iterar sobre todas las regiones
 for region in regions:
     check_ec2_instances(region)
     check_ebs_volumes(region)
