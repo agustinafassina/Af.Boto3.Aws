@@ -14,3 +14,6 @@ Pendig a sumar:
 - Montar reportes de costos en AWS, filtrando por tags de recursos.
 - Verificación del estado y rendimiento en otros servicios, como RDS o Lambda.
 - Control de accesos y permisos, auditando configuraciones IAM.
+
+## License
+By Agustina Fassina
