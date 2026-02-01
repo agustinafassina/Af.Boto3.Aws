@@ -24,6 +24,11 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 | **read-iam-users-with-access-keys.py** | Lists IAM users that have **one or more access keys**. For each key it exports: UserName, AccessKeyId, Status, CreateDate, AgeInDays, UserId, UserArn. Generates a CSV and prints a summary (active/inactive) and the oldest key. |
 | **read-export-iam.py** | Exports all IAM users with their groups, policies (direct and from groups), and tags (Project, ProjectStatus, ProjectService, ProjectDescription). Generates `users_iam_tags_permisos.csv`. |
 
+#### 🗄️ RDS (`rds/`)
+| Script | Description |
+|--------|-------------|
+| **read-rds-by-region.py** | Lists RDS instances in all regions (or a single region if passed as argument). Exports a CSV with Region, DBInstanceIdentifier, Engine, EngineVersion, DBInstanceClass, DBInstanceStatus, EndpointAddress, EndpointPort, AllocatedStorage, MultiAZ, VpcId, AvailabilityZone, DBInstanceArn. Usage: `python rds/read-rds-by-region.py` or `python rds/read-rds-by-region.py sa-east-1`. |
+
 #### 🪣 S3 (root)
 | Script | Description |
 |--------|-------------|
