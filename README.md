@@ -20,6 +20,11 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 |--------|-------------|
 | **read-cloudtrail-by-region.py** | Lists CloudTrail **trails per region** and whether each is logging. Exports a CSV with Region, TrailName, TrailArn, HomeRegion, IsLogging, CloudTrailEnabled. Prints regions with and without CloudTrail logging. |
 
+#### 🔐 ACM (`acm/`)
+| Script | Description |
+|--------|-------------|
+| **read-acm-certificates-expiration.py** | Lists **ACM certificates** in all regions with **NotAfter**, **DaysUntilExpiry**, and **ExpiringWithinWarnDays** (Yes / No / Expired). Default warning window is **90 days** (optional first argument). Exports `acm_certificates_expiration_<timestamp>.csv`. Prints certificates expiring within that window. Run: `python acm/read-acm-certificates-expiration.py` or `python acm/read-acm-certificates-expiration.py 30`. |
+
 #### 📊 CloudWatch (`cloudwatch/`)
 | Script | Description |
 |--------|-------------|
