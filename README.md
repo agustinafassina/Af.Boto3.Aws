@@ -29,6 +29,7 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 | Script | Description |
 |--------|-------------|
 | **read-ecs-inventory.py** | **ECS inventory** across all regions (or one region if passed as argument). Exports three CSVs with the same timestamp: `ecs_clusters_*.csv` (cluster counts and status), `ecs_services_*.csv` (desired/running/pending, task definition, launch type, Fargate platform, deployment %), `ecs_running_tasks_*.csv` (task ARN, task definition, started time, CPU/memory, container images). Run: `python ecs/read-ecs-inventory.py` or `python ecs/read-ecs-inventory.py sa-east-1`. |
+| **read-ecs-unused-task-definitions.py** | Lists **ACTIVE** task definition revisions **not** referenced by any service (including deployment rollouts) or **RUNNING** task in that region. Exports `ecs_unused_task_definitions_<timestamp>.csv`. Does not consider EventBridge schedules, Step Functions, or finished RunTask—verify before deregistering. Run: `python ecs/read-ecs-unused-task-definitions.py` or with a region argument. |
 
 #### 📊 CloudWatch (`cloudwatch/`)
 | Script | Description |
