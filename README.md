@@ -31,6 +31,11 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 | **read-ecs-inventory.py** | **ECS inventory** across all regions (or one region if passed as argument). Exports three CSVs with the same timestamp: `ecs_clusters_*.csv` (cluster counts and status), `ecs_services_*.csv` (desired/running/pending, task definition, launch type, Fargate platform, deployment %), `ecs_running_tasks_*.csv` (task ARN, task definition, started time, CPU/memory, container images). Run: `python ecs/read-ecs-inventory.py` or `python ecs/read-ecs-inventory.py sa-east-1`. |
 | **read-ecs-unused-task-definitions.py** | Lists **ACTIVE** task definition revisions **not** referenced by any service (including deployment rollouts) or **RUNNING** task in that region. Exports `ecs_unused_task_definitions_<timestamp>.csv`. Does not consider EventBridge schedules, Step Functions, or finished RunTask—verify before deregistering. Run: `python ecs/read-ecs-unused-task-definitions.py` or with a region argument. |
 
+#### 📦 ECR (`ecr/`)
+| Script | Description |
+|--------|-------------|
+| **read-ecr-images-not-in-ecs-task-definitions.py** | Lists **ECR images** (per repository) that do **not** match any **ACTIVE** ECS task definition `containerDefinitions[].image` string (scans ECS in **all** regions, then ECR in all regions or one region if passed as argument). Exports `ecr_images_not_in_ecs_task_definitions_<timestamp>.csv` with digest, tags, pushed date. Optional `INCLUDE_INACTIVE_TASK_DEFINITIONS` at top of script. Heavy on `DescribeTaskDefinition` API—review CSV before lifecycle delete. |
+
 #### 📊 CloudWatch (`cloudwatch/`)
 | Script | Description |
 |--------|-------------|
