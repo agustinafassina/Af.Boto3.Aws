@@ -25,6 +25,11 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 |--------|-------------|
 | **read-acm-certificates-expiration.py** | Lists **ACM certificates** in all regions with **NotAfter**, **DaysUntilExpiry**, and **ExpiringWithinWarnDays** (Yes / No / Expired). Default warning window is **90 days** (optional first argument). Exports `acm_certificates_expiration_<timestamp>.csv`. Prints certificates expiring within that window. Run: `python acm/read-acm-certificates-expiration.py` or `python acm/read-acm-certificates-expiration.py 30`. |
 
+#### 🐳 ECS (`ecs/`)
+| Script | Description |
+|--------|-------------|
+| **read-ecs-inventory.py** | **ECS inventory** across all regions (or one region if passed as argument). Exports three CSVs with the same timestamp: `ecs_clusters_*.csv` (cluster counts and status), `ecs_services_*.csv` (desired/running/pending, task definition, launch type, Fargate platform, deployment %), `ecs_running_tasks_*.csv` (task ARN, task definition, started time, CPU/memory, container images). Run: `python ecs/read-ecs-inventory.py` or `python ecs/read-ecs-inventory.py sa-east-1`. |
+
 #### 📊 CloudWatch (`cloudwatch/`)
 | Script | Description |
 |--------|-------------|
