@@ -30,6 +30,7 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 |--------|-------------|
 | **read-ecs-inventory.py** | **ECS inventory** across all regions (or one region if passed as argument). Exports three CSVs with the same timestamp: `ecs_clusters_*.csv` (cluster counts and status), `ecs_services_*.csv` (desired/running/pending, task definition, launch type, Fargate platform, deployment %), `ecs_running_tasks_*.csv` (task ARN, task definition, started time, CPU/memory, container images). Run: `python ecs/read-ecs-inventory.py` or `python ecs/read-ecs-inventory.py sa-east-1`. |
 | **read-ecs-unused-task-definitions.py** | Lists **ACTIVE** task definition revisions **not** referenced by any service (including deployment rollouts) or **RUNNING** task in that region. Exports `ecs_unused_task_definitions_<timestamp>.csv`. Does not consider EventBridge schedules, Step Functions, or finished RunTask—verify before deregistering. Run: `python ecs/read-ecs-unused-task-definitions.py` or with a region argument. |
+| **read-ecs-capacity-providers-by-cluster.py** | Lists each **ECS cluster** with `capacityProviders`, **defaultCapacityProviderStrategy** (JSON), and a best-effort type map (`EC2_ASG` vs `FARGATE_OR_CUSTOM`) via `describe_capacity_providers`. Exports `ecs_capacity_providers_by_cluster_<timestamp>.csv`. |
 
 #### 📦 ECR (`ecr/`)
 | Script | Description |
@@ -37,6 +38,7 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 | **read-ecr-images-not-in-ecs-task-definitions.py** | Lists **ECR images** (per repository) that do **not** match any **ACTIVE** ECS task definition `containerDefinitions[].image` string (scans ECS in **all** regions, then ECR in all regions or one region if passed as argument). Exports `ecr_images_not_in_ecs_task_definitions_<timestamp>.csv` with digest, tags, pushed date. Optional `INCLUDE_INACTIVE_TASK_DEFINITIONS` at top of script. Heavy on `DescribeTaskDefinition` API—review CSV before lifecycle delete. |
 | **read-ecr-untagged-images.py** | Lists **ECR images without tags** (digest-only) per repository. Optional **minimum age in days** since push (second argument): `python ecr/read-ecr-untagged-images.py sa-east-1 30`. Exports `ecr_untagged_images_<timestamp>.csv` with digest, pushed time, age, size. |
 | **read-ecr-repository-summary.py** | **Per-repository** summary in all regions (or one region): image count, tagged vs untagged counts, sum of `imageSizeInBytes` (approximate Gb column), repo URI, created date, scan-on-push. Exports `ecr_repository_summary_<timestamp>.csv`. |
+| **read-ecr-image-scan-summary.py** | **ECR basic scanning** summary per image: scan status, `findingSeverityCounts` (CRITICAL/HIGH/MEDIUM/LOW/INFORMATIONAL/UNDEFINED) via `describe_image_scan_findings`. One row per image from `describe_images`; non-`COMPLETE` scans get counts empty. Many API calls if many images. Exports `ecr_image_scan_summary_<timestamp>.csv`. |
 
 #### 📊 CloudWatch (`cloudwatch/`)
 | Script | Description |
