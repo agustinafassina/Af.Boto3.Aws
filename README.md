@@ -55,6 +55,11 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 | **read-iam-users-without-mfa.py** | Lists IAM users that **do not have MFA** enabled. Exports a CSV with UserName, UserId, Arn, CreateDate, PasswordLastUsed. |
 | **read-iam-access-keys-older-than-90-days.py** | Lists IAM access keys **older than 90 days** (configurable) for rotation. Exports a CSV with UserName, AccessKeyId, Status, CreateDate, AgeInDays, UserId, UserArn. |
 
+#### Secrets Manager (`secretsmanager/`)
+| Script | Description |
+|--------|-------------|
+| **read-secrets-manager-inventory.py** | Lists **Secrets Manager** secrets per region (all regions or one via argument). Uses `list_secrets` + `describe_secret` for each (no secret values). CSV includes rotation flags, Lambda rotation ARN, rotation rules (JSON), KMS key, last changed/rotated/accessed, pending deletion, owning service, version count, tags. Prints count of secrets with `RotationEnabled=False`. Run: `python secretsmanager/read-secrets-manager-inventory.py` or `python secretsmanager/read-secrets-manager-inventory.py sa-east-1`. |
+
 #### 🗄️ RDS (`rds/`)
 | Script | Description |
 |--------|-------------|
