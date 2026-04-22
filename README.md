@@ -60,6 +60,11 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 |--------|-------------|
 | **read-secrets-manager-inventory.py** | Lists **Secrets Manager** secrets per region (all regions or one via argument). Uses `list_secrets` + `describe_secret` for each (no secret values). CSV includes rotation flags, Lambda rotation ARN, rotation rules (JSON), KMS key, last changed/rotated/accessed, pending deletion, owning service, version count, tags. Prints count of secrets with `RotationEnabled=False`. Run: `python secretsmanager/read-secrets-manager-inventory.py` or `python secretsmanager/read-secrets-manager-inventory.py sa-east-1`. |
 
+#### DynamoDB (`dynamodb/`)
+| Script | Description |
+|--------|-------------|
+| **read-dynamodb-tables-inventory.py** | Lists **DynamoDB tables** per region (all regions or one via argument). Per table: `describe_table` (billing mode, RCU/WCU, size, item count, stream, SSE, GSI/LSI counts, creation time), `describe_time_to_live` (TTL status), `describe_continuous_backups` (PITR). Exports `dynamodb_tables_inventory_<timestamp>.csv`. Prints count with PITR enabled. Run: `python dynamodb/read-dynamodb-tables-inventory.py` or with a region argument. |
+
 #### 🗄️ RDS (`rds/`)
 | Script | Description |
 |--------|-------------|
