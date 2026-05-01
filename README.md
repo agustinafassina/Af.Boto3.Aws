@@ -1,4 +1,4 @@
-# ☁️ Af.Boto3.Aws scripts
+# ☁️ Af.Boto3.Aws scripts 🙌🏼
 Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources in the cloud.
 
 ---
