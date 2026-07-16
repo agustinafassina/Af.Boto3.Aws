@@ -71,6 +71,12 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 | **read-rds-by-region.py** | Lists RDS instances in all regions (or a single region if passed as argument). Exports a CSV with Region, DBInstanceIdentifier, Engine, EngineVersion, DBInstanceClass, DBInstanceStatus, EndpointAddress, EndpointPort, AllocatedStorage, MultiAZ, VpcId, AvailabilityZone, DBInstanceArn. Usage: `python rds/read-rds-by-region.py` or `python rds/read-rds-by-region.py sa-east-1`. |
 | **read-rds-public-private.py** | Lists RDS instances in all regions and indicates **public** vs **private** (PubliclyAccessible). Exports a CSV with Region, DBInstanceIdentifier, Accessibility (Public/Private), Engine, status, endpoint, VpcId, etc. Prints count of public and private instances. Optional region filter: `python rds/read-rds-public-private.py sa-east-1`. |
 
+
+#### Lambda (`lambda/`)
+| Script | Description |
+|--------|-------------|
+| **read-lambda-functions-inventory.py** | Lists **Lambda functions** per region (all regions or one via argument). CSV includes runtime, handler, package type (Zip/Image), role, memory, timeout, ephemeral storage, architectures, last modified, code size, VPC, layer count, state, and tags. Exports `lambda_functions_inventory_<timestamp>.csv`. Run: `python lambda/read-lambda-functions-inventory.py` or `python lambda/read-lambda-functions-inventory.py sa-east-1`. |
+
 #### 📦 Inventory (`by-region/`)
 | Script | Description |
 |--------|-------------|
