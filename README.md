@@ -1,7 +1,5 @@
-# ☁️ Af.Boto3.Aws scripts 🙌🏼
+# ☁️ Af.Boto3.Aws scripts
 Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources in the cloud.
-
----
 
 ### 📋 Script descriptions
 #### 🖥️ EC2 (`ec2/`)
@@ -97,8 +95,6 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 | Script | Description |
 |--------|-------------|
 | **read-security-groups.py** | In region `sa-east-1`, lists security groups with **open** rules (ingress or egress with `0.0.0.0/0` or `::/0`). Exports `security_groups_open.csv` with SG ID, name, direction, and CIDR. |
-
----
 
 ### 🗺️ Planned additions
 - Automated backup of EC2 instances or EBS volumes, filtered by tags or regions.
