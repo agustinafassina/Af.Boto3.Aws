@@ -75,6 +75,12 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 |--------|-------------|
 | **read-lambda-functions-inventory.py** | Lists **Lambda functions** per region (all regions or one via argument). CSV includes runtime, handler, package type (Zip/Image), role, memory, timeout, ephemeral storage, architectures, last modified, code size, VPC, layer count, state, and tags. Exports `lambda_functions_inventory_<timestamp>.csv`. Run: `python lambda/read-lambda-functions-inventory.py` or `python lambda/read-lambda-functions-inventory.py sa-east-1`. |
 
+#### EventBridge (`eventbridge/`)
+| Script | Description |
+|--------|-------------|
+| **read-eventbridge-rules-inventory.py** | Lists **EventBridge rules** on all event buses per region (or one region). One CSV row per rule/target: bus, rule name/ARN, state, description, **ScheduleExpression**, EventPattern (truncated), ManagedBy, target id/ARN/type (ecs, lambda, sqs, sns, stepfunctions, etc.) and input/transformer snippet. Exports `eventbridge_rules_inventory_<timestamp>.csv`. Run: `python eventbridge/read-eventbridge-rules-inventory.py` or with a region argument. |
+| **read-eventbridge-rules-ecs-lambda.py** | Same scan as the full inventory, but **only rules with ECS or Lambda targets**. Extra ECS columns when `EcsParameters` exist (cluster, task definition, launch type, task count). Exports `eventbridge_rules_ecs_lambda_<timestamp>.csv`. Run: `python eventbridge/read-eventbridge-rules-ecs-lambda.py` or with a region argument. |
+
 #### 📦 Inventory (`by-region/`)
 | Script | Description |
 |--------|-------------|
