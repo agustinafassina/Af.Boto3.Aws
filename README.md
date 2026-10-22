@@ -28,7 +28,7 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 |--------|-------------|
 | **read-ecs-inventory.py** | **ECS inventory** across all regions (or one region if passed as argument). Exports three CSVs with the same timestamp: `ecs_clusters_*.csv` (cluster counts and status), `ecs_services_*.csv` (desired/running/pending, task definition, launch type, Fargate platform, deployment %), `ecs_running_tasks_*.csv` (task ARN, task definition, started time, CPU/memory, container images). Run: `python ecs/read-ecs-inventory.py` or `python ecs/read-ecs-inventory.py sa-east-1`. |
 | **read-ecs-unused-task-definitions.py** | Lists **ACTIVE** task definition revisions **not** referenced by any service (including deployment rollouts) or **RUNNING** task in that region. Exports `ecs_unused_task_definitions_<timestamp>.csv`. Does not consider EventBridge schedules, Step Functions, or finished RunTask—verify before deregistering. Run: `python ecs/read-ecs-unused-task-definitions.py` or with a region argument. |
-| **read-ecs-capacity-providers-by-cluster.py** | Lists each **ECS cluster** with `capacityProviders`, **defaultCapacityProviderStrategy** (JSON), and a best-effort type map (`EC2_ASG` vs `FARGATE_OR_CUSTOM`) via `describe_capacity_providers`. Exports `ecs_capacity_providers_by_cluster_<timestamp>.csv`. |
+| **read-ecs-capacity-providers-by-cluster.py** | Lists each **ECS cluster** with `capacityProviders`, **defaultCapacityProviderStrategy** (JSON), and a best-effort type map (`FARGATE_BUILTIN`, `EC2_ASG`, `CUSTOM_OR_UNKNOWN`) via `describe_capacity_providers`. Exports `ecs_capacity_providers_by_cluster_<timestamp>.csv`. |
 
 #### 📦 ECR (`ecr/`)
 | Script | Description |
@@ -91,7 +91,7 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 |--------|-------------|
 | **read-route53-list-zones-and-records.py** | Lists all **hosted zones** and **resource record sets** (DNS records) per zone. Exports two CSVs with the same timestamp: `route53_hosted_zones_*.csv` (zone id, name, record count, private flag) and `route53_record_sets_*.csv` (HostedZoneId, ZoneName, RecordName, Type, TTL, Value). Run: `python route53/read-route53-list-zones-and-records.py`. |
 
-#### 🪣 S3 (root)
+#### 🪣 S3 (`s3/`)
 | Script | Description |
 |--------|-------------|
 | **read-s3-tags-by-project-report.py** | Lists S3 buckets that **do not have** the `Project` tag. Gets each bucket’s region and exports `buckets_without_project_tag.csv` with BucketName and Region. |
@@ -105,8 +105,5 @@ Python scripts using **boto3** (AWS SDK) to automate tasks and analyze resources
 ### 🗺️ Planned additions
 - Automated backup of EC2 instances or EBS volumes, filtered by tags or regions.
 - AWS cost reports filtered by resource tags.
-- Status and performance checks for other services such as RDS or Lambda.
-- Access and permission auditing for IAM configurations.
-
-#### ©️ License
-By Agustina Fassina
+- NAT Gateways / ENIs unassociated (cost cleanup).
+- EventBridge Scheduler schedules (complement to Rules).
