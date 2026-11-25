@@ -3,11 +3,13 @@ import csv
 
 ec2 = boto3.client('ec2', region_name='sa-east-1')
 
-response = ec2.describe_security_groups()
+security_groups = []
+for page in ec2.get_paginator('describe_security_groups').paginate():
+    security_groups.extend(page['SecurityGroups'])
 
 open_sg = []
 
-for sg in response['SecurityGroups']:
+for sg in security_groups:
     sg_id = sg['GroupId']
     sg_name = sg.get('GroupName', 'N/A')
     ingress_rules = sg['IpPermissions']
