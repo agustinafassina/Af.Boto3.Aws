@@ -10,14 +10,13 @@ for region in regions:
 
     regional_ec2 = boto3.client('ec2', region_name=region)
 
-    response = regional_ec2.describe_instances()
-
     instances_without_project_tag = []
 
-    for reservation in response['Reservations']:
-        for instance in reservation['Instances']:
-            if 'Tags' not in instance or not any(tag['Key'] == 'Project' for tag in instance['Tags']):
-                instances_without_project_tag.append(instance['InstanceId'])
+    for page in regional_ec2.get_paginator('describe_instances').paginate():
+        for reservation in page['Reservations']:
+            for instance in reservation['Instances']:
+                if not any(tag['Key'] == 'Project' for tag in instance.get('Tags', [])):
+                    instances_without_project_tag.append(instance['InstanceId'])
 
     if instances_without_project_tag:
         print(f"Instances without 'Project' tag in {region}:")
